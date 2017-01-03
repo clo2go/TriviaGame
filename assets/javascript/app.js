@@ -53,16 +53,16 @@ var trivia = {
     number: 15,
     counter: 0,
     questionNumber: 0,
-    delay: 5000,
+    delay: 3000,
     correct: 0,
     incorrect: 0,
     unanswered: 0,
 
     createStartButton: function() {
-        $("#info").html("<a class='btn btn-success btn-md' id='start'>Start</a>");
+        $("#info").html("<a class='btn btn-warning btn-lg' id='start'>Start</a>");
     },
     createStartOverButton: function() {
-        $("#info").append("<a class='btn btn-danger btn-md' id='startover'>Start Over?</a>");
+        $("#info").append("<a class='btn btn-danger btn-lg btn-lg' id='startover'>Start Over?</a>");
     },
     createQuestions: function(a) {
         trivia.run();
@@ -83,32 +83,32 @@ var trivia = {
             $(".answer").on("click", function(event) {
                 var guess = $(this).attr("id");
                 if (guess === trivia.triviaQuestions[trivia.questionNumber].correctid) {
-                    $(".panel").attr('class', 'panel panel-success');
+                    $(".panel").attr('class', 'panel panel-success text-center');
                     $(".panel-title").html("<p id='correct'>Correct!</p>");
                     $("#info").html("<img src='assets/images/" + trivia.triviaQuestions[trivia.questionNumber].correctImage + "' id='" + trivia.triviaQuestions[trivia.questionNumber].position + "'>");
                     trivia.stop();
                     trivia.correct++
                         setTimeout(function() {
                             trivia.questionNumber++;
-                            $(".panel").attr('class', 'panel panel-default');
+                            $(".panel").attr('class', 'panel panel-default text-center');
                             trivia.questionSequence();
                         }, trivia.delay);
                 } else if (guess != trivia.triviaQuestions[trivia.questionNumber].correctid) {
-                    $(".panel").attr('class', 'panel panel-danger');
-                    $(".panel-title").html("<p id='correct'>Your answers are what make Pepe .</p>");
+                    $(".panel").attr('class', 'panel panel-danger text-center');
+                    $(".panel-title").html("<p id='correct'>Your answers are what make Pepe sad.</p>");
                     $("#info").html("<p id='incorrect'>The correct answer is " + trivia.triviaQuestions[trivia.questionNumber].correct + "</p>");
                     $("#info").append("<img src='assets/images/" + trivia.triviaQuestions[trivia.questionNumber].correctImage + "' id='" + trivia.triviaQuestions[trivia.questionNumber].position + "'>");
                     trivia.stop();
                     trivia.incorrect++
                         setTimeout(function() {
                             trivia.questionNumber++;
-                            $(".panel").attr('class', 'panel panel-default');
+                            $(".panel").attr('class', 'panel panel-default text-center');
                             trivia.questionSequence();
                         }, trivia.delay);
                 }
             });
         } else {
-            $(".panel").attr('class', 'panel panel-default');
+            $(".panel").attr('class', 'panel panel-default text-center');
             $(".panel-title").html("Are you a Pepe master?");
             $("#info").html("<p id='correct'> Correct Answers: " + trivia.correct + "</p>");
             $("#info").append("<p id='incorrect'> Incorrect Answers: " + trivia.incorrect + "</p>");
@@ -129,14 +129,14 @@ var trivia = {
         $(".panel-title").html("Time remaining: " + trivia.number + " seconds");
         if (trivia.number === 0) {
             trivia.stop();
-            $(".panel").attr('class', 'panel panel-danger');
+            $(".panel").attr('class', 'panel panel-danger text-center');
             $(".panel-title").html("<p id='correct'>Time's up!  Did your spaghetti fall out of your pocket?</p>");
             $("#info").html("<p id='incorrect'>The correct answer is: " + trivia.triviaQuestions[trivia.questionNumber].correct + "</p>");
             $("#info").append("<img src='assets/images/" + trivia.triviaQuestions[trivia.questionNumber].correctImage + "' id='" + trivia.triviaQuestions[trivia.questionNumber].position + "'>");
             trivia.unanswered++;
             setTimeout(function() {
                 trivia.questionNumber++;
-                $(".panel").attr('class', 'panel panel-default');
+                $(".panel").attr('class', 'panel panel-default text-center');
                 trivia.questionSequence();
             }, trivia.delay);
         }
